@@ -18,12 +18,12 @@ import java.util.concurrent.ScheduledFuture;
  * @since 2023/10/17 23:48
  */
 @Slf4j
-public class TaskSchedulerService implements DisposableBean, InitializingBean {
+public class TaskSchedulerManager implements DisposableBean, InitializingBean {
 
     private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
     private static final ConcurrentHashMap<String, ScheduledFuture<?>> tasks = new ConcurrentHashMap<>();
 
-    public TaskSchedulerService(ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+    public TaskSchedulerManager(ThreadPoolTaskScheduler threadPoolTaskScheduler) {
         this.threadPoolTaskScheduler = threadPoolTaskScheduler;
     }
 

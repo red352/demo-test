@@ -15,4 +15,9 @@ class JavaTest {
         Map<Object, Object> map = Map.of("",0);
         map.values().forEach(System.out::println);
     }
+
+    @Test
+    void test2() {
+
+    }
 }

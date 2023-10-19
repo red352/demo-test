@@ -4,12 +4,11 @@ import cn.hutool.cron.pattern.CronPattern;
 import cn.hutool.cron.pattern.CronPatternBuilder;
 import cn.hutool.cron.pattern.CronPatternUtil;
 import cn.hutool.cron.pattern.Part;
-import com.yunxiao.spring.scheduler.TaskSchedulerService;
+import com.yunxiao.spring.scheduler.TaskSchedulerManager;
 import com.yunxiao.spring.task.ScheduledTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.CronTask;
@@ -26,15 +25,15 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class SchedulerConfig {
 
-    @Bean
-    public TaskSchedulerService taskSchedulerService() {
+//    @Bean
+    public TaskSchedulerManager taskSchedulerService() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(2);
-        return new TaskSchedulerService(scheduler);
+        return new TaskSchedulerManager(scheduler);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(@Autowired TaskSchedulerService ts) {
+//    @Bean
+    public CommandLineRunner commandLineRunner(@Autowired TaskSchedulerManager ts) {
         return args -> {
             String cron = CronPatternBuilder.of().set(Part.SECOND, "*/2").build();
             Date date = CronPatternUtil.nextDateAfter(CronPattern.of(cron), Date.from(Instant.now()), true);
