@@ -31,7 +31,9 @@ public class TaskSchedulerService implements DisposableBean, InitializingBean {
         ScheduledFuture<?> scheduledFuture = threadPoolTaskScheduler.schedule(cronTask.getRunnable(), cronTask.getTrigger());
         if (scheduledFuture != null) {
             tasks.put(taskId, scheduledFuture);
+            return;
         }
+        log.error("任务调度失败,taskId:{}", taskId);
     }
 
     public void cancel(String taskId) {
