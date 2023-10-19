@@ -1,0 +1,5 @@
+logging:
+  pattern:
+    dateformat: HH:mm:ss
+  level:
+    com.yunxiao.spring: debug

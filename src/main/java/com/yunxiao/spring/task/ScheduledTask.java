@@ -1,11 +1,11 @@
 package com.yunxiao.spring.task;
 
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author LuoYunXiao
@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @NoArgsConstructor
+@Slf4j
 public class ScheduledTask implements Runnable {
 
     private Integer taskId;
@@ -26,12 +27,7 @@ public class ScheduledTask implements Runnable {
     @Override
     public void run() {
         taskExecutor.submit(() -> {
-            System.out.println(taskId + "任务调度了...");
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            log.debug("任务Id:{}任务调度了", taskId);
         });
     }
 }
